@@ -46,7 +46,7 @@ client.on("messageCreate", async (message) => {
 
   if (message.content.toLowerCase() === "!lit") {
     const prices = await crypto();
-    message.reply(`Ripple current price is: ${prices.ripplePrice} $`, {
+    message.reply(`Ripple current price is: ${prices.litecoin} $`, {
       files: ["logos/Ethereum-Logo.wine.png"],
     });
   }
