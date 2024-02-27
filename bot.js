@@ -29,33 +29,31 @@ function readybot() {
 // i needed async before messages  async message to get proper live data from API // chatgpt told me
 
 client.on("messageCreate", async (message) => {
-  if (message.content.toLowerCase() === "!btc") {
-    const prices = await crypto();
-    message.reply(`Bitcoin current price is: ${prices.bitcoinPrice} $`);
+  const content = message.content.toLowerCase();
+  let replyMessage!;
+
+  switch (content) {
+    case "!btc":
+      replyMessage = `Bitcoin current price is: ${(await crypto()).bitcoinPrice} $`;
+      break;
+    case "!eth":
+      replyMessage = `Etherium current price is: ${(await crypto()).ethereumPrice} $`;
+      break;
+    case "!rip":
+      replyMessage = `Ripple current price is: ${(await crypto()).ripplePrice} $`;
+      break;
+    case "!lit":
+      replyMessage = `Litecoin current price is: ${(await crypto()).litecoin} $`;
+      break;
+    case "!help":
+      replyMessage = "Commands: \n !btc -> show bitcoin price \n !eth -> show etherium price \n !rip -> show ripple price \n !lit -> show litecoin price";
+      break;
+    default:
+      replyMessage = "Invalid command. Type !help for available commands.";
   }
 
-  if (message.content.toLowerCase() === "!eth") {
-    const prices = await crypto();
-    message.reply(`Etherium current price is: ${prices.ethereumPrice} $`);
-  }
-
-  if (message.content.toLowerCase() === "!rip") {
-    const prices = await crypto();
-    message.reply(`Ripple current price is: ${prices.ripplePrice} $`);
-  }
-
-  if (message.content.toLowerCase() === "!lit") {
-    const prices = await crypto();
-    message.reply(`Ripple current price is: ${prices.litecoin} $`, {
-      files: ["logos/Ethereum-Logo.wine.png"],
-    });
-  }
-
-  if (message.content.toLowerCase() === "!help") {
-    message.reply(
-      `Commands: \n !btc  -> show bitcoin price \n !eth  ->  show etherium price \n !rip -> show ripple price \n !lit -> show litcoin price`
-    );
-  }
+  message.reply(replyMessage);
 });
 
-client.login("Enter your bot token and enjoy ;) ");
+
+client.login("MTIwODM2ODY5NjI0MzAwMzQyMg.GuySUT.UoARr63qzStGjsxl76gG-aQIXEWDi_ELPD77uQ");
